@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suzie Antal</title>
+  <meta name="description" content="Suzie Antal builds tools for understanding people, hosts gatherings in San Francisco, and writes about personality, relationships and AI.">
+  <link rel="icon" href="favicon.png?v=2" sizes="48x48" type="image/png">
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;600&family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20">
+</head>
+<body>
+<main class="wrap">
+
+  <nav class="nav">
+    <a href="#projects">Projects</a>
+    <a href="#writing">Writing</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <header>
+    <img class="portrait" src="suzie.jpg?v=7" alt="Suzie Antal" width="290" height="290">
+    <h1>Suzie Antal</h1>
+    <p class="lede">I build tools for understanding people, host gatherings in San Francisco, and write about personality, relationships, and AI.</p>
+    <!-- A small hidden-in-plain-sight detail: the Lorenz attractor, chaos theory's butterfly. -->
+    <button class="quirk" type="button" aria-label="Lorenz attractor, the butterfly of chaos theory. Click to redraw.">
+      <svg viewBox="0 0 100 70" aria-hidden="true"><path id="lorenz" fill="none"/></svg>
+      <span class="quirk-label">Lorenz attractor, the butterfly of chaos theory</span>
+    </button>
+  </header>
+
+  <!-- To add a project: copy one tile block, newest first.
+       A tile with a link is <a class="tile link" href="..." target="_blank" rel="noopener"> and includes the arrow span.
+       A tile without a link is <div class="tile">.
+       To add an essay: copy one <a class="post"> block in Writing, newest first. -->
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="tiles">
+      <div class="tile">
+        <span class="tag">Current</span>
+        <h3>Tapestri</h3>
+        <p>Privacy-preserving infrastructure for continuously capturing and indexing digital footprints across messages, email, notes, and voice, with entity extraction and semantic search powering a range of local apps.</p>
+      </div>
+      <div class="tile">
+        <span class="tag">Ongoing</span>
+        <h3>Frontier Psychology</h3>
+        <p>Exploring new ways to understand human minds and relationships through novel psychometrics, digital phenotyping, and rich multimodal data.</p>
+      </div>
+      <div class="tile">
+        <span class="tag">Prospective</span>
+        <h3>10,000 Lives</h3>
+        <p>A high-resolution longitudinal dataset connecting how people think, behave, relate, and make day-to-day decisions to what happens next.</p>
+      </div>
+      <div class="tile">
+        <h3>Spectra Personality</h3>
+        <p>A high-dimensional personality app mapping thousands of traits, preferences, and behavioral patterns, with population-level comparisons.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="writing">
+    <h2>Writing</h2>
+    <div class="posts">
+      <a class="post" href="https://latentdrift.substack.com/p/10000-lives-a-dataset-of-how-human" target="_blank" rel="noopener">
+        <span class="date">Sep 2026</span>
+        <span class="post-body">
+          <span class="post-title">10,000 Lives: A Dataset of How Human Lives Unfold</span>
+          <span class="post-sub">A high-resolution, longitudinal record for studying what actually happens to people over time.</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="post" href="https://latentdrift.substack.com/p/why-our-models-of-human-nature-dont" target="_blank" rel="noopener">
+        <span class="date">May 2026</span>
+        <span class="post-body">
+          <span class="post-title">Why Our Models of Human Nature Don't Work Yet</span>
+          <span class="post-sub">Why personality psychology explains so little about real life, and how LLMs may repeat the same mistakes.</span>
+        </span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </div>
+    <p class="more"><a href="https://latentdrift.substack.com" target="_blank" rel="noopener">All writing on Latent Drift →</a></p>
+  </section>
+
+  <section id="about">
+    <h2>About</h2>
+    <dl class="about">
+      <dt>Work</dt>
+      <dd>I spent eight years at early-stage B2B startups, mostly as a technical product manager working across AI R&amp;D, search, and analytics. For the past three years, I’ve worked independently, using AI to prototype, build, and pursue my own ideas.</dd>
+
+      <dt>Community</dt>
+      <dd>I love bringing interesting people together. I host a weekly Sunday brunch and organize private dinners, hackathons, retreats, and parties for founders and researchers. I’ve also helped organize the Love Symposium and plan to host Psychometricon.</dd>
+
+      <dt>Interests</dt>
+      <dd>The human mind, BCI, love research, longitudinal data, privacy-preserving technology, and longevity.</dd>
+
+      <dt>Outside work</dt>
+      <dd>Brazilian zouk dance, meditation, painting, psychotechnologies, breathwork, and interior design.</dd>
+
+      <dt>Home</dt>
+      <dd>I grew up in Budapest, Hungary. It’s still close to my heart, and I go back several times a year. I live in San Francisco now.</dd>
+
+      <dt>Study</dt>
+      <dd>I studied Computer and Information Science at the University of Amsterdam, spanning applied math, cognitive science, and economics. I focused on natural language processing and wrote my thesis on topic modeling and opinion dynamics on Twitter and online media.</dd>
+    </dl>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="contact-note">I have a soft spot for ambitious problems without an obvious owner or playbook. If you have one, I’d love to hear about it.</p>
+    <ul class="links">
+      <li><a id="email" href="mailto:hello@su2ie.com">hello@su2ie.com</a><span id="copied" class="copied" aria-live="polite"></span></li>
+      <li><a href="https://latentdrift.substack.com" target="_blank" rel="noopener">Substack ↗</a></li>
+      <li><a href="https://www.linkedin.com/in/suzieantal" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+    </ul>
+  </section>
+
+</main>
+<script>
+  // Menu: turn into a floating pill after scrolling, and highlight the section being read.
+  (function () {
+    var nav = document.querySelector('.nav');
+    var links = [].slice.call(nav.querySelectorAll('a'));
+    var sections = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
+    function update() {
+      nav.classList.toggle('scrolled', window.scrollY > 12);
+      var current = 0;
+      sections.forEach(function (s, i) { if (s.getBoundingClientRect().top <= 160) current = i; });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = sections.length - 1;
+      links.forEach(function (a, i) { a.classList.toggle('active', i === current); });
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
+  // Clicking the address copies it and says so. (If copying isn't possible, the mail app opens instead.)
+  (function () {
+    var email = document.getElementById('email'), note = document.getElementById('copied'), address = 'hello@su2ie.com';
+    function legacyCopy() {
+      var t = document.createElement('textarea');
+      t.value = address; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;top:0;left:-9999px';
+      document.body.appendChild(t); t.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(t);
+      return ok ? Promise.resolve() : Promise.reject();
+    }
+    email.addEventListener('click', function (e) {
+      e.preventDefault();
+      var copy = navigator.clipboard ? navigator.clipboard.writeText(address).catch(legacyCopy) : legacyCopy();
+      copy.then(function () {
+        note.textContent = 'Copied';
+        setTimeout(function () { note.textContent = ''; }, 2000);
+      }, function () { window.location.href = 'mailto:' + address; });
+    });
+  })();
+
+  // The small drawing in the sidebar is real math, computed here.
+  (function () {
+    // Lorenz attractor (the "butterfly" of chaos theory), x-z projection.
+    var x = 0.1, y = 0, z = 0, dt = 0.006, pts = [];
+    for (var i = 0; i < 3400; i++) {
+      var dx = 10 * (y - x), dy = x * (28 - z) - y, dz = x * y - (8 / 3) * z;
+      x += dx * dt; y += dy * dt; z += dz * dt;
+      if (i > 120) pts.push([50 + x * 2.2, 68 - z * 1.32]);
+    }
+    var lorenz = document.getElementById('lorenz');
+    lorenz.setAttribute('d', 'M' + pts.map(function (p) { return p[0].toFixed(2) + ' ' + p[1].toFixed(2); }).join('L'));
+    var len = lorenz.getTotalLength();
+    lorenz.style.strokeDasharray = len;
+    lorenz.style.setProperty('--len', len);
+
+    function redraw() {
+      lorenz.style.animation = 'none';
+      lorenz.getBoundingClientRect(); // restart the animation
+      lorenz.style.animation = 'draw 7s ease-out both';
+    }
+    // Clicking the butterfly redraws it.
+    document.querySelector('.quirk').addEventListener('click', redraw);
+    // On phones, it also redraws each time the reader comes back to the top of the page.
+    var phone = window.matchMedia('(max-width: 900px)'), away = false;
+    window.addEventListener('scroll', function () {
+      if (!phone.matches) return;
+      if (window.scrollY > 300) { away = true; return; }
+      if (away && window.scrollY <= 10) { away = false; redraw(); }
+    }, { passive: true });
+  })();
+</script>
+</body>
+</html>

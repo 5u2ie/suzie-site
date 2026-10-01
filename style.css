@@ -62,11 +62,17 @@ header { position: fixed; top: 96px; left: max(24px, calc(50vw - 536px)); width:
 /* The butterfly: a Lorenz attractor that draws itself once. Hover to redraw. */
 .quirk { display: flex; align-items: center; gap: 12px; margin: 24px 0 0; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; text-align: left; }
 .quirk svg { flex: none; width: 88px; opacity: 0.42; transition: opacity 0.3s ease; }
-.quirk:hover svg, .quirk:focus-visible svg { opacity: 0.7; }
-.quirk path { stroke: var(--ink); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; animation: draw 7s ease-out 0.4s both; }
+.quirk.show svg, .quirk:focus-visible svg { opacity: 0.7; }
+.quirk path { stroke: var(--ink); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 .quirk-label { font: 400 12.5px/1.4 var(--mono); color: var(--muted); opacity: 0; transform: translateX(-4px); transition: opacity 0.3s ease, transform 0.3s ease; }
-.quirk:hover .quirk-label, .quirk:focus-visible .quirk-label { opacity: 1; transform: none; }
-@keyframes draw { from { stroke-dashoffset: var(--len); } to { stroke-dashoffset: 0; } }
+.quirk.show .quirk-label, .quirk:focus-visible .quirk-label { opacity: 1; transform: none; }
+/* Touch screens (iPhone and iPad) get no caption at all. */
+@media (hover: none), (pointer: coarse) { .quirk-label { display: none; } }
+/* Hover only on devices that really hover. Touch screens keep a tapped element "hovered" until you tap elsewhere. */
+@media (hover: hover) and (pointer: fine) {
+  .quirk:hover svg { opacity: 0.7; }
+  .quirk:hover .quirk-label { opacity: 1; transform: none; }
+}
 
 section { grid-column: 2; margin-top: 68px; scroll-margin-top: 96px; }
 #projects { margin-top: 0; }
@@ -140,5 +146,4 @@ section { grid-column: 2; margin-top: 68px; scroll-margin-top: 96px; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .nav.scrolled { animation: none; transform: translateY(4px); }
-  .quirk path { animation: none; }
 }

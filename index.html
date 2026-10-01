@@ -24,7 +24,7 @@
   <meta name="twitter:title" content="Suzie Antal">
   <meta name="twitter:description" content="I build tools for understanding people, host gatherings in San Francisco, and write about personality, relationships, and AI.">
   <meta name="twitter:image" content="http://su2ie.com/og-image.png">
-  <link rel="stylesheet" href="style.css?v=20">
+  <link rel="stylesheet" href="style.css?v=23">
 </head>
 <body>
 <main class="wrap">
@@ -184,24 +184,75 @@
       if (i > 120) pts.push([50 + x * 2.2, 68 - z * 1.32]);
     }
     var lorenz = document.getElementById('lorenz');
-    lorenz.setAttribute('d', 'M' + pts.map(function (p) { return p[0].toFixed(2) + ' ' + p[1].toFixed(2); }).join('L'));
-    var len = lorenz.getTotalLength();
-    lorenz.style.strokeDasharray = len;
-    lorenz.style.setProperty('--len', len);
 
-    function redraw() {
-      lorenz.style.animation = 'none';
-      lorenz.getBoundingClientRect(); // restart the animation
-      lorenz.style.animation = 'draw 7s ease-out both';
+    // Drawing is driven by a timer instead of CSS dash tricks, so the speed is identical in every browser.
+    var parts = pts.map(function (p) { return p[0].toFixed(2) + ' ' + p[1].toFixed(2); });
+    var full = 'M' + parts.join('L');
+    var cum = [0], ends = [], pos = 1, i;
+    for (i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+    for (i = 0; i < parts.length; i++) { pos += parts[i].length; ends.push(pos); pos += 1; }
+    var total = cum[cum.length - 1];
+
+    // Show the first `frac` (0 to 1) of the curve, measured along its length.
+    function render(frac) {
+      if (frac <= 0) { lorenz.setAttribute('d', ''); return; }
+      var target = frac * total, lo = 1, hi = cum.length - 1;
+      while (lo < hi) { var mid = (lo + hi) >> 1; if (cum[mid] < target) lo = mid + 1; else hi = mid; }
+      lorenz.setAttribute('d', frac >= 1 ? full : full.slice(0, ends[lo]));
     }
-    // Clicking the butterfly redraws it.
-    document.querySelector('.quirk').addEventListener('click', redraw);
+
+    var quirk = document.querySelector('.quirk');
+    var phone = window.matchMedia('(max-width: 900px)');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var raf = 0, started = false;
+
+    // About 7 seconds on a desktop and 10 on a phone, slowing down toward the end.
+    function draw() {
+      cancelAnimationFrame(raf);
+      if (reduceMotion.matches) { render(1); return; }
+      var duration = phone.matches ? 10000 : 7000, delay = 400, t0 = performance.now();
+      render(0);
+      (function step(now) {
+        var t = (now - t0 - delay) / duration;
+        if (t >= 1) { render(1); return; }
+        render(t < 0 ? 0 : 1 - Math.pow(1 - t, 2.2));
+        raf = requestAnimationFrame(step);
+      })(t0);
+    }
+
+    // First draw: wait until the page is loaded, visible, and the butterfly is on screen,
+    // so the whole drawing is seen instead of finishing before anyone is looking.
+    function onScreen() {
+      var r = quirk.getBoundingClientRect();
+      return r.bottom > 0 && r.top < window.innerHeight * 0.95;
+    }
+    function tryStart() {
+      if (started || document.readyState !== 'complete' || document.visibilityState !== 'visible' || !onScreen()) return;
+      started = true;
+      // Two frames later, so the page has actually been painted before the drawing begins.
+      requestAnimationFrame(function () { requestAnimationFrame(draw); });
+    }
+    window.addEventListener('load', tryStart);
+    window.addEventListener('scroll', tryStart, { passive: true });
+    window.addEventListener('resize', tryStart);
+    document.addEventListener('visibilitychange', tryStart);
+    tryStart();
+
+    // Clicking the butterfly redraws it, and shows the caption for a few seconds on desktop.
+    var captionTimer = null;
+    quirk.addEventListener('click', function () {
+      started = true;
+      draw();
+      quirk.classList.add('show');
+      clearTimeout(captionTimer);
+      captionTimer = setTimeout(function () { quirk.classList.remove('show'); quirk.blur(); }, 2800);
+    });
     // On phones, it also redraws each time the reader comes back to the top of the page.
-    var phone = window.matchMedia('(max-width: 900px)'), away = false;
+    var away = false;
     window.addEventListener('scroll', function () {
       if (!phone.matches) return;
       if (window.scrollY > 300) { away = true; return; }
-      if (away && window.scrollY <= 10) { away = false; redraw(); }
+      if (away && window.scrollY <= 10) { away = false; draw(); }
     }, { passive: true });
   })();
 </script>
